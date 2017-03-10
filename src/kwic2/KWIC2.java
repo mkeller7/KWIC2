@@ -1,6 +1,8 @@
 package kwic2;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
@@ -16,6 +18,8 @@ public class KWIC2 {
     private JTextArea outputArea;
     private JTextArea inputArea;
     private JButton startButton;
+
+    private iFilter ls = new LineStorage();
 
     public KWIC2() {
         JFrame frame = new JFrame("KWIC Indexing System");
@@ -49,12 +53,45 @@ public class KWIC2 {
         centerLayout.add(outputScroll);
 
         startButton = new JButton("Start");
-        
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                processInput();
+            }
+        });
+
         mainFrame.add(centerLayout, BorderLayout.CENTER);
         mainFrame.add(startButton, BorderLayout.SOUTH);
-        
+
         frame.add(mainFrame);
         frame.setVisible(true);
+    }
+
+    private void processInput() {
+        ls.setup();
+        
+        // **************** Testing ****************** //
+        //Test no char at index
+        System.err.println("get test" + ls.getChar(0));
+
+        //Get the text and put it in
+        String text = inputArea.getText();
+        for (int x = 0; x < text.length(); x++) {
+            ls.setChar(text.charAt(x));
+        }
+
+        //Print to check data
+//        for(int x = 0; x < text.length(); x++){
+//            System.out.print(ls.getChar(x));
+//        }
+
+        //Check for end of char flag
+//        int x = 0;
+//        while (ls.getChar(x) != iFilter.END_FLAG) {
+//            System.out.print(ls.getChar(x));
+//            x++;
+//        }
+//        System.out.println();
     }
 
     public static void main(String[] args) {
