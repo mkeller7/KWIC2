@@ -2,7 +2,7 @@ package kwic2;
 
 import java.util.ArrayList;
 
-public class LineStorage implements iFilter {
+public class LineStorage implements IFilter {
 
     private ArrayList<Character> storage = new ArrayList<>();
 
@@ -12,7 +12,7 @@ public class LineStorage implements iFilter {
             return storage.get(index);
         }catch(IndexOutOfBoundsException e){
             //Invalid value return null char
-            return iFilter.END_FLAG;
+            return IFilter.END_OF_LINE_FLAG;
         }
     }
 

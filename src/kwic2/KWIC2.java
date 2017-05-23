@@ -19,7 +19,8 @@ public class KWIC2 {
     private JTextArea inputArea;
     private JButton startButton;
 
-    private iFilter ls = new LineStorage();
+    private IFilter ls = new LineStorage();
+    private IFilter cs = new CircularShift(ls);
 
     public KWIC2() {
         JFrame frame = new JFrame("KWIC Indexing System");
@@ -68,11 +69,12 @@ public class KWIC2 {
     }
 
     private void processInput() {
+        //Clear line storage
         ls.setup();
         
         // **************** Testing ****************** //
         //Test no char at index
-        System.err.println("get test" + ls.getChar(0));
+//        System.err.println("get test" + ls.getChar(0));
 
         //Get the text and put it in
         String text = inputArea.getText();
@@ -87,11 +89,13 @@ public class KWIC2 {
 
         //Check for end of char flag
 //        int x = 0;
-//        while (ls.getChar(x) != iFilter.END_FLAG) {
+//        while (ls.getChar(x) != IFilter.END_FLAG) {
 //            System.out.print(ls.getChar(x));
 //            x++;
 //        }
 //        System.out.println();
+
+        cs.setup();
     }
 
     public static void main(String[] args) {
