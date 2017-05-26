@@ -71,32 +71,16 @@ public class KWIC2 {
     private void processInput() {
         //Clear line storage
         ls.setup();
-                
-        // **************** Testing ****************** //
-        //Test no char at index
-//        System.err.println("get test" + ls.getChar(0));
 
-        //Get the text and put it in
         String text = inputArea.getText();
         for (int x = 0; x < text.length(); x++) {
             ls.setChar(text.charAt(x));
         }
-        
+
         //Mark the end of the text
-        ls.setChar(IFilter.END_OF_LINE_FLAG);
+        ls.setChar(IFilter.END_OF_FILE_FLAG);
 
-        //Print to check data
-//        for(int x = 0; x < text.length(); x++){
-//            System.out.print(ls.getChar(x));
-//        }
-
-        //Check for end of char flag
-//        int x = 0;
-//        while (ls.getChar(x) != IFilter.END_FLAG) {
-//            System.out.print(ls.getChar(x));
-//            x++;
-//        }
-//        System.out.println();
+        System.out.println(ls.toString());
 
         cs.setup();
     }
