@@ -26,7 +26,23 @@ public class Line {
         return wordStorage.get(index);        
     }
     
+    public ArrayList<Word> get(){
+        return wordStorage;
+    }
+    
     public int wordCount(){
         return wordStorage.size();
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        
+        for(Word w: wordStorage){
+            sb.append(w);
+            sb.append("\n");
+        }
+        
+        return sb.toString();
     }
 }

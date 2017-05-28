@@ -6,15 +6,12 @@ public class LineStorage implements ISetFilter {
 
     private ArrayList<Line> lineStorage = new ArrayList<>();
     private Line currentLine = new Line();
-    
+
     private ArrayList<Character> fullText = new ArrayList<>();
-    private String text;
 
     private boolean wordStarted = false;
-
     private int charPosition = 0;
     private int wordStartPosition = 0;
-//    int linePosition = 0;
 
     //Store the index of the words for each line and store the char so the words
     //can be reconstructed later.
@@ -22,7 +19,7 @@ public class LineStorage implements ISetFilter {
     public void setChar(char c) {
         //Store the text
         fullText.add(c);
-        
+
         //Store the position of the words and the line they are in
         switch (c) {
             case IFilter.SPACE_FLAG:
@@ -39,7 +36,7 @@ public class LineStorage implements ISetFilter {
             case IFilter.NEW_LINE_FLAG:
                 System.out.println("New line");
 
-                if (wordStartPosition != (charPosition -1)) {
+                if (wordStartPosition != (charPosition - 1)) {
                     currentLine.add(new Word(wordStartPosition,
                             charPosition - 1)); //Do not include the space
 
@@ -61,10 +58,11 @@ public class LineStorage implements ISetFilter {
                 if (wordStarted) {
                     currentLine.add(new Word(wordStartPosition,
                             charPosition - 1)); //Do not include the flag
+
+                    //Add the line before finishing
+                    lineStorage.add(currentLine);
                 }
 
-                //Add the line before finishing
-                lineStorage.add(currentLine);
                 break;
 
             default:
@@ -75,6 +73,8 @@ public class LineStorage implements ISetFilter {
                 }
                 break;
         }
+        
+        //Keep track of the chacters
         charPosition++;
     }
 
@@ -97,9 +97,17 @@ public class LineStorage implements ISetFilter {
 
         return lineStorage.get(lineNumber);
     }
+
+    public ArrayList<Line> getLine() {
+        return lineStorage;
+    }
+
+//    public ArrayList<Character> getText() {
+//        return fullText;
+//    }
     
-    public ArrayList<Character> fullText(){
-        return fullText;
+    public char getChar(int index){
+        return fullText.get(index);
     }
 
     public String toString() {
@@ -111,11 +119,11 @@ public class LineStorage implements ISetFilter {
                         .append(lineStorage.get(x).get(y)).append("\n");
             }
         }
-        
+
         sb.append("\n");
         sb.append("Full Text \n");
         sb.append(fullText.toString());
-        
+
         return sb.toString();
     }
 }
