@@ -21,6 +21,7 @@ public class KWIC2 {
 
     final private ISetFilter ls = new LineStorage();
     final private IFilter cs = new CircularShift(ls);
+    final private IFilter nw = new RemoveNoiseWord(ls, cs);
 
     public KWIC2() {
         JFrame frame = new JFrame("KWIC Indexing System");
@@ -76,13 +77,11 @@ public class KWIC2 {
         for (int x = 0; x < text.length(); x++) {
             ls.setChar(text.charAt(x));
         }
-
         //Mark the end of the text
         ls.setChar(IFilter.END_OF_FILE_FLAG);
 
-        System.out.println(ls.toString());
-
         cs.setup();
+        nw.setup();
     }
 
     public static void main(String[] args) {

@@ -31,7 +31,7 @@ public class Word {
     }
     
     public int length(){
-        return end - start;
+        return (end - start) + 1;
     }
     
     public String toString(){

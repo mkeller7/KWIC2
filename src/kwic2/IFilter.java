@@ -8,6 +8,6 @@ interface IFilter {
     static final char SPACE_FLAG = ' ';
     static final char NEW_LINE_FLAG = '\n';
 
-    Line getLine(int lineNumber);
+    ArrayList<Line> getLine();
     void setup();
 }

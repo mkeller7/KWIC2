@@ -46,7 +46,6 @@ public class LineStorage implements ISetFilter {
                 }
 
                 wordStarted = false;
-                charPosition = 0;
                 wordStartPosition = 0;
 
                 break;
@@ -90,14 +89,6 @@ public class LineStorage implements ISetFilter {
     }
 
     @Override
-    public Line getLine(int lineNumber) {
-        if (lineNumber > lineStorage.size()) {
-            return null; //new Line();
-        }
-
-        return lineStorage.get(lineNumber);
-    }
-
     public ArrayList<Line> getLine() {
         return lineStorage;
     }
@@ -123,7 +114,7 @@ public class LineStorage implements ISetFilter {
         sb.append("\n");
         sb.append("Full Text \n");
         sb.append(fullText.toString());
-
+        
         return sb.toString();
     }
 }
