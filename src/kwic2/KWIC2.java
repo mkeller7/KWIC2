@@ -79,6 +79,9 @@ public class KWIC2 {
         }
         //Mark the end of the text
         ls.setChar(IFilter.END_OF_FILE_FLAG);
+        
+        //Display the info of the text that is read in
+//        System.out.println(ls);
 
         cs.setup();
         nw.setup();
