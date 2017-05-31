@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Line {
     
-    private final ArrayList<Word> wordStorage = new ArrayList<>();
+    private ArrayList<Word> wordStorage = new ArrayList<>();
     
     public Line() {
     }
@@ -14,13 +14,13 @@ public class Line {
     }
     
     public void clear() {
-//        System.out.println("Line: wordStorage clear");
+        System.out.println("Line: wordStorage clear");
         wordStorage.clear();
     }
     
     public Word get(int index) {
         if (index > wordStorage.size()) {
-            return null; //new Word(IFilter.END_OF_FILE_FLAG, IFilter.END_OF_FILE_FLAG);
+            return new Word(IFilter.END_OF_FILE_FLAG, IFilter.END_OF_FILE_FLAG);
         }
         
         return wordStorage.get(index);        

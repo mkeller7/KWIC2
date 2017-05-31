@@ -19,14 +19,9 @@ public class KWIC2 {
     private JTextArea inputArea;
     private JButton startButton;
 
-    //**********************************
-    //Move the filters into the process input area so setup will be called
-    //when they are created internally
-    final private ISetFilter lineStorage = new LineStorage();
-    final private IFilter circularShift = new CircularShift(lineStorage);
-    final private IFilter noiseWords = new RemoveNoiseWord(lineStorage, 
-            circularShift);
-    final private IFilter output = new Output(lineStorage, noiseWords);
+    final private ISetFilter ls = new LineStorage();
+    final private IFilter cs = new CircularShift(ls);
+    final private IFilter nw = new RemoveNoiseWord(ls, cs);
 
     public KWIC2() {
         JFrame frame = new JFrame("KWIC Indexing System");
@@ -75,25 +70,21 @@ public class KWIC2 {
     }
 
     private void processInput() {
-        lineStorage.setup();
+        //Clear line storage
+        ls.setup();
 
-        //****************************Make it to where you can pass one string
         String text = inputArea.getText();
         for (int x = 0; x < text.length(); x++) {
-            lineStorage.setChar(text.charAt(x));
+            ls.setChar(text.charAt(x));
         }
         //Mark the end of the text
-        lineStorage.setChar(IFilter.END_OF_FILE_FLAG);
+        ls.setChar(IFilter.END_OF_FILE_FLAG);
         
         //Display the info of the text that is read in
-        System.out.println(lineStorage);
+//        System.out.println(ls);
 
-        circularShift.setup();
-        noiseWords.setup();
-        output.setup();
-        
-        //Display the results
-        outputArea.setText(((Output)output).getText());
+        cs.setup();
+        nw.setup();
     }
 
     public static void main(String[] args) {

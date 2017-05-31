@@ -92,12 +92,15 @@ public class LineStorage implements ISetFilter {
     public ArrayList<Line> getLine() {
         return lineStorage;
     }
+
+//    public ArrayList<Character> getText() {
+//        return fullText;
+//    }
     
     public char getChar(int index){
         return fullText.get(index);
     }
 
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
