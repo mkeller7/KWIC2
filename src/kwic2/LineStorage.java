@@ -15,7 +15,7 @@ public class LineStorage implements ISetFilter {
 
     @Override
     public void setText(String text) {
-        setup();
+        process();
 
         for (char c : text.toCharArray()) {
             setChar(c);
@@ -31,8 +31,6 @@ public class LineStorage implements ISetFilter {
         //Store the position of the words and the line they are in
         switch (c) {
             case IFilter.SPACE_FLAG:
-//                System.out.println("Its a space");
-
                 if (wordStarted) {
                     //New word add it to the line
                     currentLine.add(new Word(wordStartPosition,
@@ -42,8 +40,6 @@ public class LineStorage implements ISetFilter {
                 break;
 
             case IFilter.NEW_LINE_FLAG:
-//                System.out.println("New line");
-
                 if (wordStartPosition != -1) {
                     currentLine.add(new Word(wordStartPosition,
                             charPosition - 1)); //Do not include the space
@@ -59,8 +55,6 @@ public class LineStorage implements ISetFilter {
                 break;
 
             case IFilter.END_OF_FILE_FLAG:
-//                System.out.println("End of file");
-
                 //Add word if one was started
                 if (wordStarted) {
                     currentLine.add(new Word(wordStartPosition,
@@ -86,8 +80,8 @@ public class LineStorage implements ISetFilter {
     }
 
     @Override
-    public void setup() {
-        System.out.println("Line storage setup");
+    public void process() {
+        System.out.println("LineStorage");
         lineStorage.clear();
         fullText.clear();
         currentLine = new Line();

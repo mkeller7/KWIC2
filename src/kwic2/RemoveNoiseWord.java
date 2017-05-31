@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class RemoveNoiseWord implements IFilter {
 
     private ArrayList<Line> lineStorage = new ArrayList<>();
-
-    private int maxNoiseWordLength = 3;
     private ArrayList<String> noiseWordsList = new ArrayList<>();
 
     private IFilter lineStorageFilter;
@@ -27,8 +25,8 @@ public class RemoveNoiseWord implements IFilter {
     }
 
     @Override
-    public void setup() {
-        System.out.println("RemoveNoiseWord Setup");
+    public void process() {
+        System.out.println("RemoveNoiseWord");
 
         lineStorage.clear();
         makeNoiseWordsList();

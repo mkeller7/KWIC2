@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Line {
     
-    private ArrayList<Word> wordStorage = new ArrayList<>();
+    private final ArrayList<Word> wordStorage = new ArrayList<>();
     
     public Line() {
     }
@@ -14,7 +14,6 @@ public class Line {
     }
     
     public void clear() {
-//        System.out.println("Line: wordStorage clear");
         wordStorage.clear();
     }
     

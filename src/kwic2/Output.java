@@ -23,8 +23,8 @@ public class Output implements IFilter {
     }
 
     @Override
-    public void setup() {
-        System.out.println("Output Setup");
+    public void process() {
+        System.out.println("Output");
     }
 
     private String rebuildText() {

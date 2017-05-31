@@ -9,5 +9,5 @@ interface IFilter {
     static final char NEW_LINE_FLAG = '\n';
 
     ArrayList<Line> getLine();
-    void setup();
+    void process();
 }

@@ -15,9 +15,9 @@ import javax.swing.JTextArea;
 
 public class KWIC2 {
 
-    private JTextArea outputArea;
-    private JTextArea inputArea;
-    private JButton startButton;
+    private final JTextArea outputArea;
+    private final JTextArea inputArea;
+    private final JButton startButton;
 
     final private ISetFilter lineStorage = new LineStorage();
     final private IFilter circularShift = new CircularShift(lineStorage);
@@ -77,9 +77,9 @@ public class KWIC2 {
         //Display the info of the text that is read in
         System.out.println(lineStorage);
         
-        circularShift.setup();
-        noiseWords.setup();
-        output.setup();
+        circularShift.process();
+        noiseWords.process();
+        output.process();
 
         //Display the results
         outputArea.setText(((Output) output).getText());

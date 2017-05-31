@@ -40,8 +40,8 @@ public class CircularShift implements IFilter {
     }
 
     @Override
-    public void setup() {
-        System.out.println("CircularShift Setup");
+    public void process() {
+        System.out.println("CircularShift");
 
         lineStorage.clear();
         shiftLine();
