@@ -14,7 +14,7 @@ public class Line {
     }
     
     public void clear() {
-        System.out.println("Line: wordStorage clear");
+//        System.out.println("Line: wordStorage clear");
         wordStorage.clear();
     }
     
