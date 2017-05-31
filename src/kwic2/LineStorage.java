@@ -13,10 +13,18 @@ public class LineStorage implements ISetFilter {
     private int charPosition = 0;
     private int wordStartPosition = 0;
 
+    @Override
+    public void setText(String text) {
+        setup();
+
+        for (char c : text.toCharArray()) {
+            setChar(c);
+        }
+    }
+
     //Store the index of the words for each line and store the char so the words
     //can be reconstructed later.
-    @Override
-    public void setChar(char c) {
+    private void setChar(char c) {
         //Store the text
         fullText.add(c);
 
@@ -36,7 +44,7 @@ public class LineStorage implements ISetFilter {
             case IFilter.NEW_LINE_FLAG:
 //                System.out.println("New line");
 
-                if (wordStartPosition != -1){
+                if (wordStartPosition != -1) {
                     currentLine.add(new Word(wordStartPosition,
                             charPosition - 1)); //Do not include the space
 
@@ -72,7 +80,7 @@ public class LineStorage implements ISetFilter {
                 }
                 break;
         }
-        
+
         //Keep track of the chacters
         charPosition++;
     }
@@ -93,14 +101,11 @@ public class LineStorage implements ISetFilter {
         return lineStorage;
     }
 
-//    public ArrayList<Character> getText() {
-//        return fullText;
-//    }
-    
-    public char getChar(int index){
+    public char getChar(int index) {
         return fullText.get(index);
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
@@ -114,7 +119,7 @@ public class LineStorage implements ISetFilter {
         sb.append("\n");
         sb.append("Full Text \n");
         sb.append(fullText.toString());
-        
+
         return sb.toString();
     }
 }

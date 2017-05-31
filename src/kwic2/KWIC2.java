@@ -74,12 +74,14 @@ public class KWIC2 {
         //Clear line storage
         lineStorage.setup();
 
-        String text = inputArea.getText();
-        for (int x = 0; x < text.length(); x++) {
-            lineStorage.setChar(text.charAt(x));
-        }
+        //Mark the end of the text with a flag
+        lineStorage.setText(inputArea.getText() + IFilter.END_OF_FILE_FLAG);
+//        for (int x = 0; x < text.length(); x++) {
+//            lineStorage.setChar(text.charAt(x));
+//        }
+
         //Mark the end of the text
-        lineStorage.setChar(IFilter.END_OF_FILE_FLAG);
+//        lineStorage.setChar(IFilter.END_OF_FILE_FLAG);
 
         //Display the info of the text that is read in
         System.out.println(lineStorage);
