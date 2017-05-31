@@ -28,7 +28,7 @@ public class RemoveNoiseWord implements IFilter {
 
     @Override
     public void setup() {
-//        System.out.println("RemoveNoiseWord Setup");
+        System.out.println("RemoveNoiseWord Setup");
 
         lineStorage.clear();
         makeNoiseWordsList();
@@ -60,9 +60,6 @@ public class RemoveNoiseWord implements IFilter {
         for (int index = w.getStart(); index <= w.getEnd(); index++) {
             sb.append(((LineStorage) lineStorageFilter).getChar(index));
         }
-
-//        System.out.println("--Word--\n" + sb + "\n" + w.getStart() + ", " + 
-//                w.getEnd());
         
         return noiseWordsList.indexOf(sb.toString().toLowerCase());
     }
@@ -70,13 +67,9 @@ public class RemoveNoiseWord implements IFilter {
     private void removeNoiseWords() {
         for (Line currentLine : previousFilter.getLine()) {      
             //Check the first word for a noise word
-            if(checkNoiseWordList(currentLine.get(0)) == -1){
-//                System.out.println("Not a noise word");
-                
+            if(checkNoiseWordList(currentLine.get(0)) == -1){                
                 lineStorage.add(currentLine);
             }
-        }
-        
-//        System.out.println("Lines stored \n" + lineStorage.size());
+        }        
     }
 }

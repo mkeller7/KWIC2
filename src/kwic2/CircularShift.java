@@ -20,8 +20,6 @@ public class CircularShift implements IFilter {
 
     private void shiftLine() {
         for (Line currentLine : ((LineStorage) lineStorageFilter).getLine()) {
-//            System.out.println("--shiftLine-- \n" + currentLine.toString());
-
             Line tempLine;
             int wordCount = currentLine.wordCount();
 
@@ -31,6 +29,8 @@ public class CircularShift implements IFilter {
                 tempLine = new Line();
 
                 for (int y = 0; y < wordCount; y++, position++) {
+                    //Use modular division to add the words before the x value
+                    //to the end of the line
                     tempLine.add(currentLine.get(position % wordCount));
                 }
 
@@ -45,8 +45,6 @@ public class CircularShift implements IFilter {
 
         lineStorage.clear();
         shiftLine();
-
-//        System.out.println(lineStorage);
     }
 
     @Override
