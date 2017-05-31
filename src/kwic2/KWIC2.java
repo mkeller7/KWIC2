@@ -75,7 +75,7 @@ public class KWIC2 {
         lineStorage.setText(inputArea.getText() + IFilter.END_OF_FILE_FLAG);
 
         //Display the info of the text that is read in
-        System.out.println(lineStorage);
+//        System.out.println(lineStorage);
         
         circularShift.process();
         noiseWords.process();
