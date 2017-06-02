@@ -1,11 +1,14 @@
 package kwic2;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class RemoveNoiseWord implements IFilter {
 
     private ArrayList<Line> lineStorage = new ArrayList<>();
     private ArrayList<String> noiseWordsList = new ArrayList<>();
+    private int noiseWordMaxLength;
 
     private IFilter lineStorageFilter;
     private IFilter previousFilter; //For the filter before this one
@@ -49,25 +52,40 @@ public class RemoveNoiseWord implements IFilter {
         noiseWordsList.add("as");
         noiseWordsList.add("at");
         noiseWordsList.add("off");
+
+        //Find the longest word 
+        String longest = Collections.max(noiseWordsList,
+                Comparator.comparing(s -> s.length()));
+
+        noiseWordMaxLength = longest.length();
     }
 
     private int checkNoiseWordList(Word w) {
-        //Reconstruct the forst word to check for a noise word
-        StringBuilder sb = new StringBuilder();
+            //If the word is larger than the largest noise word it is not a 
+            //noiseword
+        if (w.length() > noiseWordMaxLength) {
+            //If the word is larger than the largest noise word it is not a 
+            //noiseword
+            return -1;
+            
+        } else {            
+            //Reconstruct the forst word to check for a noise word
+            StringBuilder sb = new StringBuilder();
 
-        for (int index = w.getStart(); index <= w.getEnd(); index++) {
-            sb.append(((LineStorage) lineStorageFilter).getChar(index));
+            for (int index = w.getStart(); index <= w.getEnd(); index++) {
+                sb.append(((LineStorage) lineStorageFilter).getChar(index));
+            }
+
+            return noiseWordsList.indexOf(sb.toString().toLowerCase());
         }
-        
-        return noiseWordsList.indexOf(sb.toString().toLowerCase());
     }
 
     private void removeNoiseWords() {
-        for (Line currentLine : previousFilter.getLine()) {      
+        for (Line currentLine : previousFilter.getLine()) {
             //Check the first word for a noise word
-            if(checkNoiseWordList(currentLine.get(0)) == -1){                
+            if (checkNoiseWordList(currentLine.get(0)) == -1) {
                 lineStorage.add(currentLine);
             }
-        }        
+        }
     }
 }

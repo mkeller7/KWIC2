@@ -2,22 +2,23 @@ package kwic2;
 
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 
 public class Output implements IFilter {
 
     private IFilter lineStorageFilter;
     private IFilter previousFilter; //For the filter before this one
+    
+    private Collator collator;
 
-    public Output(IFilter lineStorageFilter) {
+    public Output(IFilter lineStorageFilter, Collator collator) {
         this.lineStorageFilter = lineStorageFilter;
+        this.collator = collator;
     }
 
-    public Output(IFilter lineStorageFilter, IFilter previousFilter) {
-        this(lineStorageFilter);
+    public Output(IFilter lineStorageFilter, Collator collator,
+            IFilter previousFilter) {
+        this(lineStorageFilter, collator);
         this.previousFilter = previousFilter;
     }
 
@@ -51,7 +52,7 @@ public class Output implements IFilter {
             sb = new StringBuilder();
         }
 
-        Collections.sort(lines, Collator.getInstance(Locale.ENGLISH));
+        Collections.sort(lines, collator);
 
         //Put all of the lines into one string after they are sorted
         for (String s : lines) {

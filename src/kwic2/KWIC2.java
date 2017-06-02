@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.Collator;
+import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,7 +24,8 @@ public class KWIC2 {
     final private ISetFilter lineStorage = new LineStorage();
     final private IFilter circularShift = new CircularShift(lineStorage);
     final private IFilter noiseWords = new RemoveNoiseWord(lineStorage, circularShift);
-    final private IFilter output = new Output(lineStorage, noiseWords);
+    final private IFilter output = new Output(lineStorage, 
+            Collator.getInstance(Locale.ENGLISH), noiseWords);
 
     public KWIC2() {
         JFrame frame = new JFrame("KWIC Indexing System");
@@ -56,11 +59,8 @@ public class KWIC2 {
         centerLayout.add(outputScroll);
 
         startButton = new JButton("Start");
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                processInput();
-            }
+        startButton.addActionListener((ActionEvent e) -> {
+            processInput();
         });
 
         mainFrame.add(centerLayout, BorderLayout.CENTER);
@@ -71,18 +71,25 @@ public class KWIC2 {
     }
 
     private void processInput() {
-        //Mark the end of the text with a flag
-        lineStorage.setText(inputArea.getText() + IFilter.END_OF_FILE_FLAG);
-
-        //Display the info of the text that is read in
-//        System.out.println(lineStorage);
+        //Track the time
+        float startTime = System.nanoTime();
+        System.out.println(startTime);
         
+        //Mark the end of the text with a flag to mark the end
+        lineStorage.setText(inputArea.getText() + IFilter.END_OF_FILE_FLAG);
         circularShift.process();
         noiseWords.process();
         output.process();
+        
+        //Put the time to milli seconds
+        System.out.println(System.nanoTime());
 
         //Display the results
         outputArea.setText(((Output) output).getText());
+        float endTime = System.nanoTime();
+        outputArea.append("\n\n");
+        outputArea.append("----Time to process---- \n");
+        outputArea.append((endTime - startTime)/1000000 + " milliseconds");
     }
 
     public static void main(String[] args) {
