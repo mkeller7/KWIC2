@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CircularShift implements IFilter {
 
-    private ArrayList<Line> lineStorage = new ArrayList<>();
+    private final ArrayList<Line> lineStorage = new ArrayList<>();
 
     private IFilter lineStorageFilter;
     private IFilter previousFilter; //For the filter before this one

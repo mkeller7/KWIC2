@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class LineStorage implements ISetFilter {
 
-    private ArrayList<Line> lineStorage = new ArrayList<>();
+    private final ArrayList<Line> lineStorage = new ArrayList<>();
     private Line currentLine = new Line();
 
-    private ArrayList<Character> fullText = new ArrayList<>();
+    private final ArrayList<Character> fullText = new ArrayList<>();
 
     private boolean wordStarted = false;
     private int charPosition = 0;
@@ -51,7 +51,6 @@ public class LineStorage implements ISetFilter {
 
                 wordStarted = false;
                 wordStartPosition = -1;
-
                 break;
 
             case IFilter.END_OF_FILE_FLAG:
@@ -63,7 +62,6 @@ public class LineStorage implements ISetFilter {
                     //Add the line before finishing
                     lineStorage.add(currentLine);
                 }
-
                 break;
 
             default:

@@ -34,6 +34,7 @@ public class Word {
         return (end - start) + 1;
     }
     
+    @Override
     public String toString(){
         return start + ", " + end;
     }

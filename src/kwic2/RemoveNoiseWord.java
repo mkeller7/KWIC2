@@ -6,8 +6,8 @@ import java.util.Comparator;
 
 public class RemoveNoiseWord implements IFilter {
 
-    private ArrayList<Line> lineStorage = new ArrayList<>();
-    private ArrayList<String> noiseWordsList = new ArrayList<>();
+    private final ArrayList<Line> lineStorage = new ArrayList<>();
+    private final ArrayList<String> noiseWordsList = new ArrayList<>();
     private int noiseWordMaxLength;
 
     private IFilter lineStorageFilter;
@@ -64,8 +64,6 @@ public class RemoveNoiseWord implements IFilter {
             //If the word is larger than the largest noise word it is not a 
             //noiseword
         if (w.length() > noiseWordMaxLength) {
-            //If the word is larger than the largest noise word it is not a 
-            //noiseword
             return -1;
             
         } else {            
