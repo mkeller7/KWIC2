@@ -15,6 +15,7 @@ public class RemoveNoiseWord implements IFilter {
 
     public RemoveNoiseWord(IFilter lineStorageFilter) {
         this.lineStorageFilter = lineStorageFilter;
+        previousFilter = lineStorageFilter;
     }
 
     public RemoveNoiseWord(IFilter lineStorageFilter, IFilter previousFilter) {
@@ -61,12 +62,12 @@ public class RemoveNoiseWord implements IFilter {
     }
 
     private int checkNoiseWordList(Word w) {
-            //If the word is larger than the largest noise word it is not a 
-            //noiseword
+        //If the word is larger than the largest noise word it is not a 
+        //noiseword
         if (w.length() > noiseWordMaxLength) {
             return -1;
-            
-        } else {            
+
+        } else {
             //Reconstruct the forst word to check for a noise word
             StringBuilder sb = new StringBuilder();
 
@@ -85,5 +86,10 @@ public class RemoveNoiseWord implements IFilter {
                 lineStorage.add(currentLine);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return lineStorage.toString();
     }
 }

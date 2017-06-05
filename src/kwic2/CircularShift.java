@@ -11,6 +11,7 @@ public class CircularShift implements IFilter {
 
     public CircularShift(IFilter lineStorageFilter) {
         this.lineStorageFilter = lineStorageFilter;
+        previousFilter = lineStorageFilter;
     }
 
     public CircularShift(IFilter lineStorageFilter, IFilter previousFilter) {
@@ -19,7 +20,7 @@ public class CircularShift implements IFilter {
     }
 
     private void shiftLine() {
-        for (Line currentLine : ((LineStorage) lineStorageFilter).getLine()) {
+        for (Line currentLine : previousFilter.getLine()) {
             Line tempLine;
             int wordCount = currentLine.wordCount();
 

@@ -14,6 +14,7 @@ public class Output implements IFilter {
     public Output(IFilter lineStorageFilter, Collator collator) {
         this.lineStorageFilter = lineStorageFilter;
         this.collator = collator;
+        previousFilter = lineStorageFilter;
     }
 
     public Output(IFilter lineStorageFilter, Collator collator,

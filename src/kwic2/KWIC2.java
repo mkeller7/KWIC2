@@ -21,11 +21,18 @@ public class KWIC2 {
     private final JButton startButton;
 
     final private ISetFilter lineStorage = new LineStorage();
+
+    //Circular Shift first
     final private IFilter circularShift = new CircularShift(lineStorage);
     final private IFilter noiseWords = new RemoveNoiseWord(lineStorage, circularShift);
-    final private IFilter output = new Output(lineStorage, 
+    final private IFilter output = new Output(lineStorage,
             Collator.getInstance(Locale.ENGLISH), noiseWords);
 
+    //Remove Noise Words first
+//    final private IFilter noiseWords = new RemoveNoiseWord(lineStorage);
+//    final private IFilter circularShift = new CircularShift(lineStorage, noiseWords);
+//    final private IFilter output = new Output(lineStorage,
+//            Collator.getInstance(Locale.ENGLISH), circularShift);
     public KWIC2() {
         JFrame frame = new JFrame("KWIC Indexing System");
         // Add a window listner for close button
@@ -73,13 +80,18 @@ public class KWIC2 {
         //Track the time
         float startTime = System.nanoTime();
         System.out.println(startTime);
-        
+
         //Mark the end of the text with a flag to mark the end
         lineStorage.setText(inputArea.getText() + IFilter.END_OF_FILE_FLAG);
+        //Circular Shift first
         circularShift.process();
         noiseWords.process();
+
+        //Remove Noise Words first
+//        noiseWords.process();
+//        circularShift.process();
         output.process();
-        
+
         //Put the time to milli seconds
         System.out.println(System.nanoTime());
 
@@ -88,7 +100,7 @@ public class KWIC2 {
         float endTime = System.nanoTime();
         outputArea.append("\n\n");
         outputArea.append("----Time to process---- \n");
-        outputArea.append((endTime - startTime)/1000000 + " milliseconds");
+        outputArea.append((endTime - startTime) / 1000000 + " milliseconds");
     }
 
     public static void main(String[] args) {
